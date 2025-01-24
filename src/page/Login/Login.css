@@ -1,0 +1,41 @@
+.login-component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .login-component .card {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-component .btn {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-component .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .login-component .form-control {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+  }
+  
+  .login-component small a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-component small a:hover {
+    text-decoration: underline;
+  }
+  
