@@ -37,7 +37,7 @@ function ClientPage() {
 
                 {/* Content body start */}
 
-                <div class="content-body">
+                <div className="content-body">
                     <ClientComponent />
                 </div>
 

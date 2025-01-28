@@ -4,16 +4,17 @@ import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/Header";
 import Navheader from "../../components/Navheader/Navheader";
 import PreLoader from "../../components/PreLoader/PreLoader";
-import ProductComponent from "../../components/ProductComponent/ProductComponent";
+import EnterProductListComponent from "../../components/EnterProductComponents/EnterProductList";
 import ScrollableModal from "../../components/ScrollableModal/ScrollableModal";
 import Sidebar from "../../components/Sidebar/Sidebar";
-
+import EnterProductDetailsComponents from "../../components/EnterProductComponents/EnterProductDetailsComponent";
 
 // import { Container } from './styles';
 
-function ProductPage() {
-    return (
-        <div className="ProductPage">
+function EnterProductList() {
+  return (
+
+    <div className="enterProductList">
             {/* Preloader start */}
             <PreLoader />
             {/* Preloader end */}
@@ -39,7 +40,7 @@ function ProductPage() {
                 {/* Content body start */}
 
                 <div className="content-body">
-                    <ProductComponent />
+                    <EnterProductDetailsComponents />
                 </div>
 
                 {/* Content body end */}
@@ -53,8 +54,8 @@ function ProductPage() {
 
                 {/* Footer end */}
             </div>
-        </div>
-    );
+            </div>
+  );
 }
 
-export default ProductPage;
+export default EnterProductList;

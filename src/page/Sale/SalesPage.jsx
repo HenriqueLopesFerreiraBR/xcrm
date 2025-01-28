@@ -37,7 +37,7 @@ function ProductPage() {
 
                 {/* Content body start */}
 
-                <div class="content-body">
+                <div className="content-body">
                     <SaleComponent />
                 </div>
 

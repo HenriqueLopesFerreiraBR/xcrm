@@ -36,7 +36,7 @@ function Home() {
 
                 {/* Content body start */}
 
-                <div class="content-body">
+                <div className="content-body">
 
                 </div>
 

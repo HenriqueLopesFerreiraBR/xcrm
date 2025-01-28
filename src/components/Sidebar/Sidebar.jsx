@@ -15,8 +15,8 @@ function Sidebar() {
                     <a className="has-arrow" href="#" aria-expanded="false">
                         <div className="menu-icon">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11 2.5C14.5899 2.5 17.5 5.41015 17.5 9C17.5 12.5899 14.5899 15.5 11 15.5C7.41015 15.5 4.5 12.5899 4.5 9C4.5 5.41015 7.41015 2.5 11 2.5Z" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2.5 19.5C2.5 16.5 6.5 14 11 14C15.5 14 19.5 16.5 19.5 19.5" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 2.5C14.5899 2.5 17.5 5.41015 17.5 9C17.5 12.5899 14.5899 15.5 11 15.5C7.41015 15.5 4.5 12.5899 4.5 9C4.5 5.41015 7.41015 2.5 11 2.5Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M2.5 19.5C2.5 16.5 6.5 14 11 14C15.5 14 19.5 16.5 19.5 19.5" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </div>
                         <span className="nav-text">Cadastro</span>
@@ -34,16 +34,16 @@ function Sidebar() {
                     <a className="has-arrow" href="#" aria-expanded="false">
                         <div className="menu-icon">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 5H19V19H3V5Z" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M8 2V5M14 2V5M3 9H19" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 5H19V19H3V5Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M8 2V5M14 2V5M3 9H19" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </div>
                         <span className="nav-text">Estoque</span>
                     </a>
                     <ul >
-                        <li><a href="cadastro-usuario.html">Entrada de Produtos</a></li>
+                        <li><a href="/listaEntradaProdutos">Entrada de Produtos</a></li>
                         <li><a href="cadastro-cliente.html">Relatórios</a></li>
-                        <li><a href="cadastro-funcionario.html">Listar</a></li>
+                        <li><a href="/estoque">Listar</a></li>
                     </ul>
                 </li>
                 
@@ -52,9 +52,9 @@ function Sidebar() {
                     <a className="has-arrow" href="#" aria-expanded="false">
                         <div className="menu-icon">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 11H17" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M11 5V17" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M1 1H21V21H1V1Z" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 11H17" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M11 5V17" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M1 1H21V21H1V1Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </div>
                         <span className="nav-text">Financeiro</span>
@@ -73,9 +73,9 @@ function Sidebar() {
                     <a href="/vendas" aria-expanded="false">
                         <div className="menu-icon">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 2L4 20H18L16 2H6Z" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M10 9H12" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M10 13H12" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6 2L4 20H18L16 2H6Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M10 9H12" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M10 13H12" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </div>
                         <span className="nav-text">Vendas</span>
@@ -87,9 +87,9 @@ function Sidebar() {
                     <a href="configuracoes.html" aria-expanded="false">
                         <div className="menu-icon">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11 15.5C13.2091 15.5 15 13.7091 15 11.5C15 9.29086 13.2091 7.5 11 7.5C8.79086 7.5 7 9.29086 7 11.5C7 13.7091 8.79086 15.5 11 15.5Z" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M4.5 4.5L6.5 6.5" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M15.5 15.5L17.5 17.5" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 15.5C13.2091 15.5 15 13.7091 15 11.5C15 9.29086 13.2091 7.5 11 7.5C8.79086 7.5 7 9.29086 7 11.5C7 13.7091 8.79086 15.5 11 15.5Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M4.5 4.5L6.5 6.5" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M15.5 15.5L17.5 17.5" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </div>
                         <span className="nav-text">Configurações</span>
@@ -101,8 +101,8 @@ function Sidebar() {
                     <a href="logout.html" aria-expanded="false">
                         <div className="menu-icon">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8 7L12 11L8 15" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 11H3M19 2H7C5.89543 2 5 2.89543 5 4V18C5 19.1046 5.89543 20 7 20H19C20.1046 20 21 19.1046 21 18V4C21 2.89543 20.1046 2 19 2Z" stroke="#888888" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 7L12 11L8 15" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M12 11H3M19 2H7C5.89543 2 5 2.89543 5 4V18C5 19.1046 5.89543 20 7 20H19C20.1046 20 21 19.1046 21 18V4C21 2.89543 20.1046 2 19 2Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </div>
                         <span className="nav-text">Sair</span>

@@ -37,7 +37,7 @@ function UserPage() {
 
                 {/* Content body start */}
 
-                <div class="content-body">
+                <div className="content-body">
                     <UserComponent />
                 </div>
 

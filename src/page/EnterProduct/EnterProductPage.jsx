@@ -1,19 +1,18 @@
-import React from "react";
+import React from 'react';
+import EnterProductFormComponent from '../../components/EnterProductComponents/EnterProductFormComponent';
 import ChatBox from "../../components/ChatBox/ChatBox";
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/Header";
 import Navheader from "../../components/Navheader/Navheader";
 import PreLoader from "../../components/PreLoader/PreLoader";
-import ProductComponent from "../../components/ProductComponent/ProductComponent";
 import ScrollableModal from "../../components/ScrollableModal/ScrollableModal";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
-
 // import { Container } from './styles';
 
-function ProductPage() {
-    return (
-        <div className="ProductPage">
+function EnterProductPage() {
+  return (
+    <div className="enterProductPage">
             {/* Preloader start */}
             <PreLoader />
             {/* Preloader end */}
@@ -39,7 +38,7 @@ function ProductPage() {
                 {/* Content body start */}
 
                 <div className="content-body">
-                    <ProductComponent />
+                    <EnterProductFormComponent />
                 </div>
 
                 {/* Content body end */}
@@ -54,7 +53,7 @@ function ProductPage() {
                 {/* Footer end */}
             </div>
         </div>
-    );
+  );
 }
 
-export default ProductPage;
+export default EnterProductPage;
