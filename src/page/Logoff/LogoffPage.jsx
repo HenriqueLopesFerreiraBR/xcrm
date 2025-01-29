@@ -1,4 +1,5 @@
 import React from 'react';
+import LogoffComponent from '../../components/LogoffComponent/LogoffComponent';
 import ChatBox from "../../components/ChatBox/ChatBox";
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/Header";
@@ -6,13 +7,12 @@ import Navheader from "../../components/Navheader/Navheader";
 import PreLoader from "../../components/PreLoader/PreLoader";
 import ScrollableModal from "../../components/ScrollableModal/ScrollableModal";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import SettingFormComponent from '../../components/SettingComponents/SettingsFormComponent';
 
 // import { Container } from './styles';
 
-function SettingFormPage() {
+function LogoffPage() {
   return (
-    <div className="SettingFormPage">
+    <div className="LogoffPage">
             {/* Preloader start */}
             <PreLoader />
             {/* Preloader end */}
@@ -24,7 +24,7 @@ function SettingFormPage() {
                 {/* Nav header end */}
 
                 {/* Chat box start*/}
-                <ChatBox />s
+                <ChatBox />
                 {/* Chat box End*/}
 
                 {/* Header start */}
@@ -38,7 +38,7 @@ function SettingFormPage() {
                 {/* Content body start */}
 
                 <div className="content-body">
-                    <SettingFormComponent />
+                    <LogoffComponent />
                 </div>
 
                 {/* Content body end */}
@@ -56,4 +56,4 @@ function SettingFormPage() {
   );
 }
 
-export default SettingFormPage;
+export default LogoffPage;

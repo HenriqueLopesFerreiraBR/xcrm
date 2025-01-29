@@ -18,6 +18,7 @@ import TaxPage from "./page/Tax/TaxPage";
 import SalesDataPage from "./page/Sale/SalesDataPage";
 import SettingsPage from "./page/Settings/SettingsPage";
 import SettingFormPage from "./page/Settings/SettingsFormPage";
+import LogoffPage from "./page/Logoff/LogoffPage";
 
 // Função para verificar se o usuário está autenticado
 const isAuthenticated = () => {
@@ -57,6 +58,7 @@ function App() {
           <Route path="/fiscal" element={<ProtectedRoute  element={<TaxPage />}  />}/>
           <Route path="/configuracoes" element={<ProtectedRoute  element={<SettingsPage />}  />}/>
           <Route path="/formConfiguracoes" element={<ProtectedRoute  element={<SettingFormPage />}  />}/>
+          <Route path="/logoff" element={<ProtectedRoute  element={<LogoffPage />}  />}/>
         </Routes>
       </div>
     </Router>

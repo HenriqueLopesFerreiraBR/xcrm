@@ -269,7 +269,7 @@ function Header() {
 												<div className="products">
 													<img src="images/tab/1.jpg" className="avatar avatar-md" alt=""/>
 													<div>
-														<h6>Thomas Fleming</h6>
+														<h6>Henrique Lopes</h6>
 														<span>Web Designer</span>	
 													</div>	
 												</div>
@@ -288,7 +288,7 @@ function Header() {
 
 													<span className="ms-2">My Project</span><span className="badge badge-sm badge-secondary light rounded-circle text-white ms-2">4</span>
 												</a>
-												<a href="/" className="dropdown-item ai-icon ">
+												{/* <a href="/" className="dropdown-item ai-icon ">
 													<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 													<path d="M17.9026 8.85114L13.4593 12.4642C12.6198 13.1302 11.4387 13.1302 10.5992 12.4642L6.11844 8.85114" stroke="var(--primary)"  strokeLinecap="round" strokeLinejoin="round"/>
 													<path fillRule="evenodd" clipRule="evenodd" d="M16.9089 21C19.9502 21.0084 22 18.5095 22 15.4384V8.57001C22 5.49883 19.9502 3 16.9089 3H7.09114C4.04979 3 2 5.49883 2 8.57001V15.4384C2 18.5095 4.04979 21.0084 7.09114 21H16.9089Z" stroke="var(--primary)"  strokeLinecap="round" strokeLinejoin="round"/>
@@ -303,7 +303,7 @@ function Header() {
 														</svg>
 
 													<span className="ms-2">Notification </span>
-												</a>
+												</a> */}
 											</div>
 											<div className="card-footer px-0 py-2">
 												<a href="/" className="dropdown-item ai-icon ">
@@ -314,7 +314,7 @@ function Header() {
 
 													<span className="ms-2">Settings </span>
 												</a>
-												<a href="page-login.html" className="dropdown-item ai-icon">
+												<a href="/logoff" className="dropdown-item ai-icon">
 													<svg className="profle-logout" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff7979"  strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
 													<span className="ms-2 text-danger">Logout </span>
 												</a>
