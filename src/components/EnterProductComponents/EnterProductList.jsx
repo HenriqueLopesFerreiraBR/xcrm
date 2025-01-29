@@ -27,15 +27,21 @@ function ProductEntryList() {
 
     // const handleViewDetails = (entry) => {
     //     alert(
-    //         `Detalhes da entrada:\n\nProduto: ${entry.productName}\nCategoria: ${entry.category}\nQuantidade: ${entry.quantity}\nValor Total: R$ ${parseFloat(
+    //         `Detalhes da entrada:\n\nProduto: ${entry.productName}\n
+    //         Categoria: ${entry.category}\n
+    //         Quantidade: ${entry.quantity}\n
+    //         Valor Total: R$ ${parseFloat(
     //             entry.totalValue
     //         ).toFixed(2)}`
     //     );
     // };
 
-    const handleViewDetails = (entry) => {
-        navigate("/detalhes-entrada", { state: { entry } });
-    };
+
+        const handleViewDetails = async (entry) => {
+            await navigate("/detalhes-entrada", { state: { entry } });
+            console.log(navigate)
+        };
+
 
     return (
         <div className="productEntryList">
@@ -71,11 +77,18 @@ function ProductEntryList() {
                                         <td>{entry.productName}</td>
                                         <td>{entry.category}</td>
                                         <td>{entry.quantity}</td>
-                                        <td>R$ {parseFloat(entry.totalValue).toFixed(2)}</td>
+                                        <td>
+                                            R${" "}
+                                            {parseFloat(
+                                                entry.totalValue
+                                            ).toFixed(2)}
+                                        </td>
                                         <td>
                                             <button
                                                 className="btn btn-info btn-sm"
-                                                onClick={() => handleViewDetails(entry)}
+                                                onClick={() =>
+                                                    handleViewDetails(entry)
+                                                }
                                             >
                                                 Detalhe
                                             </button>

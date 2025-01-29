@@ -60,17 +60,17 @@ function Sidebar() {
                         <span className="nav-text">Financeiro</span>
                     </a>
                     <ul >
-                        <li><a href="cadastro-usuario.html">Contas a Pagar</a></li>
-                        <li><a href="cadastro-cliente.html">Contas a Receber</a></li>
-                        <li><a href="cadastro-funcionario.html">Contabil</a></li>
-                        <li><a href="cadastro-funcionario.html">Fiscal</a></li>
+                        <li><a href="/pagar">Contas a Pagar</a></li>
+                        <li><a href="/receber">Contas a Receber</a></li>
+                        <li><a href="/contabil">Contabil</a></li>
+                        <li><a href="/fiscal">Fiscal</a></li>
                     </ul>
                 </li>
 
                 
                 {/* <!-- Vendas --> */}
                 <li>
-                    <a href="/vendas" aria-expanded="false">
+                    <a className="has-arrow" href="#" aria-expanded="false">
                         <div className="menu-icon">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 2L4 20H18L16 2H6Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>
@@ -80,11 +80,15 @@ function Sidebar() {
                         </div>
                         <span className="nav-text">Vendas</span>
                     </a>
+                    <ul>
+                        <li><a href="/vendas">Vendas</a></li>
+                        <li><a href="/dadosVendas">DadosVendas</a></li>
+                    </ul>
                 </li>
                 
                 {/* <!-- Configurações --> */}
                 <li>
-                    <a href="configuracoes.html" aria-expanded="false">
+                    <a href="/configuracoes" aria-expanded="false">
                         <div className="menu-icon">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M11 15.5C13.2091 15.5 15 13.7091 15 11.5C15 9.29086 13.2091 7.5 11 7.5C8.79086 7.5 7 9.29086 7 11.5C7 13.7091 8.79086 15.5 11 15.5Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"/>

@@ -41,9 +41,11 @@ function EnterProductDetailsComponents() {
                     </div>
                 </div>
             </div>
-            <button className="btn btn-secondary mt-3" onClick={() => navigate(-1)}>
-                Voltar
-            </button>
+            <a href="/listaEntradaProdutos">
+                <button className="btn btn-secondary mt-3">
+                    Voltar
+                </button>
+            </a>
     </div>
   );
 }

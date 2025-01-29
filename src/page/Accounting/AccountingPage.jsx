@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
+import AccontingComponent from '../../components/Acconting/AccontingComponent';
 import ChatBox from "../../components/ChatBox/ChatBox";
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/Header";
 import Navheader from "../../components/Navheader/Navheader";
 import PreLoader from "../../components/PreLoader/PreLoader";
-import SaleComponent from "../../components/SaleComponent/Sale2Component";
 import ScrollableModal from "../../components/ScrollableModal/ScrollableModal";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 // import { Container } from './styles';
 
-function SalesPage() {
-    return (
-        <div className="SalesPage">
+function AccontingPage() {
+  return (
+    <div className="accontingPage">
             {/* Preloader start */}
             <PreLoader />
             {/* Preloader end */}
@@ -38,7 +38,7 @@ function SalesPage() {
                 {/* Content body start */}
 
                 <div className="content-body">
-                    <SaleComponent />
+                    <AccontingComponent />
                 </div>
 
                 {/* Content body end */}
@@ -53,7 +53,7 @@ function SalesPage() {
                 {/* Footer end */}
             </div>
         </div>
-    );
+  );
 }
 
-export default SalesPage;
+export default AccontingPage;

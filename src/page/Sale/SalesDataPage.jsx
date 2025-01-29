@@ -4,15 +4,15 @@ import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/Header";
 import Navheader from "../../components/Navheader/Navheader";
 import PreLoader from "../../components/PreLoader/PreLoader";
-import SaleComponent from "../../components/SaleComponent/Sale2Component";
+import SaleReportComponent from "../../components/SaleComponent/SaleReportComponent";
 import ScrollableModal from "../../components/ScrollableModal/ScrollableModal";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 // import { Container } from './styles';
 
-function SalesPage() {
+function SalesDataPage() {
     return (
-        <div className="SalesPage">
+        <div className="SaleDataPage">
             {/* Preloader start */}
             <PreLoader />
             {/* Preloader end */}
@@ -38,7 +38,7 @@ function SalesPage() {
                 {/* Content body start */}
 
                 <div className="content-body">
-                    <SaleComponent />
+                    <SaleReportComponent />
                 </div>
 
                 {/* Content body end */}
@@ -56,4 +56,4 @@ function SalesPage() {
     );
 }
 
-export default SalesPage;
+export default SalesDataPage;
