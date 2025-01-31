@@ -8,21 +8,22 @@ import Login from "./page/Login/LoginPage";
 import ProductPage from "./page/Product/ProductPage";
 import SalesPage from "./page/Sale/SalesPage";
 import UserPage from "./page/Users/UserPage";
-import EnterProductDetailsPage from "./page/EnterProduct/EnterProductDetailsPage"
+import EnterProductDetailsPage from "./page/EnterProduct/EnterProductDetailsPage";
 import EnterProductPage from "./page/EnterProduct/EnterProductPage";
 import StockPage from "./page/Stock/StockPage";
 import PaymentsPage from "./page/Payments/PaymentsPage";
 import AccountsReceivablePage from "./page/AccountsReceivable/AccountsReceivablePage";
-import AccontingPage from "./page/Accounting/AccountingPage";
+import AccountingPage from "./page/Accounting/AccountingPage";
 import TaxPage from "./page/Tax/TaxPage";
 import SalesDataPage from "./page/Sale/SalesDataPage";
 import SettingsPage from "./page/Settings/SettingsPage";
 import SettingFormPage from "./page/Settings/SettingsFormPage";
 import LogoffPage from "./page/Logoff/LogoffPage";
+import axios from "axios";
 
 // Função para verificar se o usuário está autenticado
 const isAuthenticated = () => {
-  return localStorage.getItem("isAuthenticated") === "true";
+  return localStorage.getItem("token") !== null;
 };
 
 // Componente para rotas protegidas
@@ -30,9 +31,7 @@ const ProtectedRoute = ({ element }) => {
   return isAuthenticated() ? element : <Navigate to="/login" />;
 };
 
-
 function App() {
-  
   return (
     <Router>
       <div className="App">
@@ -50,15 +49,15 @@ function App() {
           <Route path="/dadosVendas" element={<ProtectedRoute element={<SalesDataPage />} />} />
           <Route path="/entradaProdutos" element={<ProtectedRoute element={<EnterProductPage />} />} />
           <Route path="/listaEntradaProdutos" element={<ProtectedRoute element={<EnterProductList />} />} />
-          <Route path="/detalhes-entrada" element={<ProtectedRoute  element={<EnterProductDetailsPage />}  />}/>
-          <Route path="/estoque" element={<ProtectedRoute  element={<StockPage />}  />}/>
-          <Route path="/pagar" element={<ProtectedRoute  element={<PaymentsPage />}  />}/>
-          <Route path="/receber" element={<ProtectedRoute  element={<AccountsReceivablePage />}  />}/>
-          <Route path="/contabil" element={<ProtectedRoute  element={<AccontingPage />}  />}/>
-          <Route path="/fiscal" element={<ProtectedRoute  element={<TaxPage />}  />}/>
-          <Route path="/configuracoes" element={<ProtectedRoute  element={<SettingsPage />}  />}/>
-          <Route path="/formConfiguracoes" element={<ProtectedRoute  element={<SettingFormPage />}  />}/>
-          <Route path="/logoff" element={<ProtectedRoute  element={<LogoffPage />}  />}/>
+          <Route path="/detalhes-entrada" element={<ProtectedRoute element={<EnterProductDetailsPage />} />} />
+          <Route path="/estoque" element={<ProtectedRoute element={<StockPage />} />} />
+          <Route path="/pagar" element={<ProtectedRoute element={<PaymentsPage />} />} />
+          <Route path="/receber" element={<ProtectedRoute element={<AccountsReceivablePage />} />} />
+          <Route path="/contabil" element={<ProtectedRoute element={<AccountingPage />} />} />
+          <Route path="/fiscal" element={<ProtectedRoute element={<TaxPage />} />} />
+          <Route path="/configuracoes" element={<ProtectedRoute element={<SettingsPage />} />} />
+          <Route path="/formConfiguracoes" element={<ProtectedRoute element={<SettingFormPage />} />} />
+          <Route path="/logoff" element={<ProtectedRoute element={<LogoffPage />} />} />
         </Routes>
       </div>
     </Router>
