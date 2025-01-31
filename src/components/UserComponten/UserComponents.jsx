@@ -1,58 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function UserComponent() {
     const [users, setUsers] = useState([]);
     const [formData, setFormData] = useState({
         name: "",
-        username: "",
-        contact: "",
-        gender: "",
-        location: "",
-        status: "Ativo",
+        email: "",
+        password: ""
     });
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    const fetchUsers = async () => {
+        try {
+            const response = await axios.get("http://localhost:3099/api/users/");
+            setUsers(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar usuários", error);
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        setUsers([...users, { ...formData, id: Date.now() }]);
-        setFormData({
-            name: "",
-            username: "",
-            contact: "",
-            gender: "",
-            location: "",
-            status: "Ativo",
-        });
-    };
-
-    const handleDeleteUser = (id) => {
-        setUsers(users.filter((user) => user.id !== id));
-    };
-
-    const handleEditUser = (id) => {
-        const userToEdit = users.find((user) => user.id === id);
-        setFormData(userToEdit);
-        setUsers(users.filter((user) => user.id !== id));
+        try {
+            await axios.post("http://localhost:3099/api/users/register", formData);
+            fetchUsers();
+            setFormData({ name: "", email: "", password: "" });
+            alert("Usuário cadastrado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao cadastrar usuário", error);
+            alert("Erro ao cadastrar usuário");
+        }
     };
 
     return (
-        <div className="UserComponent">
+        <div className="userComponent">
             <div className="page-titles">
                 <ol className="breadcrumb">
                     <li>
-                        <h5 className="bc-title">Gerenciar Cliente</h5>
+                        <h5 className="bc-title">Gerenciar Usuários</h5>
                     </li>
                     <li className="breadcrumb-item active">
-                        <a href="/">Gerenciar Cliente</a>
+                        <a href="/">Gerenciar Usuários</a>
                     </li>
                 </ol>
             </div>
 
-            {/* Formulário de Cadastro */}
             <div className="card mb-4">
                 <div className="card-body">
                     <h4 className="card-title">Cadastrar Usuário</h4>
@@ -70,63 +70,26 @@ function UserComponent() {
                                 />
                             </div>
                             <div className="col-md-4 mb-3">
-                                <label>Usuário</label>
+                                <label>Email</label>
                                 <input
-                                    type="text"
-                                    name="username"
+                                    type="email"
+                                    name="email"
                                     className="form-control"
-                                    value={formData.username}
+                                    value={formData.email}
                                     onChange={handleInputChange}
                                     required
                                 />
                             </div>
                             <div className="col-md-4 mb-3">
-                                <label>Contato</label>
+                                <label>Senha</label>
                                 <input
-                                    type="text"
-                                    name="contact"
+                                    type="password"
+                                    name="password"
                                     className="form-control"
-                                    value={formData.contact}
+                                    value={formData.password}
                                     onChange={handleInputChange}
                                     required
                                 />
-                            </div>
-                            <div className="col-md-4 mb-3">
-                                <label>Gênero</label>
-                                <select
-                                    name="gender"
-                                    className="form-control"
-                                    value={formData.gender}
-                                    onChange={handleInputChange}
-                                    required
-                                >
-                                    <option value="">Selecione</option>
-                                    <option value="Masculino">Masculino</option>
-                                    <option value="Feminino">Feminino</option>
-                                </select>
-                            </div>
-                            <div className="col-md-4 mb-3">
-                                <label>Localização</label>
-                                <input
-                                    type="text"
-                                    name="location"
-                                    className="form-control"
-                                    value={formData.location}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            <div className="col-md-4 mb-3">
-                                <label>Status</label>
-                                <select
-                                    name="status"
-                                    className="form-control"
-                                    value={formData.status}
-                                    onChange={handleInputChange}
-                                >
-                                    <option value="Ativo">Ativo</option>
-                                    <option value="Inativo">Inativo</option>
-                                </select>
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary">
@@ -136,7 +99,6 @@ function UserComponent() {
                 </div>
             </div>
 
-            {/* Tabela de Usuários */}
             <div className="card">
                 <div className="card-body">
                     <h4 className="card-title">Usuários Cadastrados</h4>
@@ -145,11 +107,7 @@ function UserComponent() {
                             <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Usuário</th>
-                                    <th>Contato</th>
-                                    <th>Gênero</th>
-                                    <th>Localização</th>
-                                    <th>Status</th>
+                                    <th>Email</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -157,36 +115,12 @@ function UserComponent() {
                                 {users.map((user) => (
                                     <tr key={user.id}>
                                         <td>{user.name}</td>
-                                        <td>{user.username}</td>
-                                        <td>{user.contact}</td>
-                                        <td>{user.gender}</td>
-                                        <td>{user.location}</td>
+                                        <td>{user.email}</td>
                                         <td>
-                                            <span
-                                                className={`badge ${
-                                                    user.status === "Ativo"
-                                                        ? "badge-success"
-                                                        : "badge-danger"
-                                                }`}
-                                            >
-                                                {user.status}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <button
-                                                className="btn btn-warning btn-sm me-2"
-                                                onClick={() =>
-                                                    handleEditUser(user.id)
-                                                }
-                                            >
+                                            <button className="btn btn-warning btn-sm me-2">
                                                 Editar
                                             </button>
-                                            <button
-                                                className="btn btn-danger btn-sm"
-                                                onClick={() =>
-                                                    handleDeleteUser(user.id)
-                                                }
-                                            >
+                                            <button className="btn btn-danger btn-sm">
                                                 Deletar
                                             </button>
                                         </td>
@@ -194,7 +128,7 @@ function UserComponent() {
                                 ))}
                                 {users.length === 0 && (
                                     <tr>
-                                        <td colSpan="7" className="text-center">
+                                        <td colSpan="3" className="text-center">
                                             Nenhum usuário cadastrado.
                                         </td>
                                     </tr>

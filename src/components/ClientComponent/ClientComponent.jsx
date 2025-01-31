@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CustomerComponent() {
+function ClinetComponent() {
     const [customers, setCustomers] = useState([]);
     const [formData, setFormData] = useState({
         name: "",
@@ -40,7 +40,8 @@ function CustomerComponent() {
     };
 
     return (
-        <div className="customerComponent">
+        <div className="ClinetComponent
+    ">
             <div className="page-titles">
                 <ol className="breadcrumb">
                     <li>
@@ -200,4 +201,4 @@ function CustomerComponent() {
     );
 }
 
-export default CustomerComponent;
+export default ClinetComponent;
