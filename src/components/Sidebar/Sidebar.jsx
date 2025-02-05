@@ -24,7 +24,7 @@ function Sidebar() {
                     <ul >
                         <li><a href="/usuarios">Usuário</a></li>
                         <li><a href="/clientes">Cliente</a></li>
-                        <li><a href="/funcionarios">Funcionário</a></li>
+                        {/* <li><a href="/funcionarios">Funcionário</a></li> */}
                         <li><a href="/Produtos">Produto</a></li>
                     </ul>
                 </li>

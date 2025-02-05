@@ -1,47 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-function ClinetComponent() {
-    const [customers, setCustomers] = useState([]);
+function ClientComponent() {
+    const [clients, setClients] = useState([]);
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        cpf: "",
+        cnpj: "",
         phone: "",
         address: "",
-        status: "Ativo",
+        active: "Ativo",
     });
+    const [editingId, setEditingId] = useState(null);
+
+    useEffect(() => {
+        fetchClients();
+    }, []);
+
+    const fetchClients = async () => {
+        try {
+            const response = await axios.get("http://localhost:3099/api/clients/");
+            setClients(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar clientes", error);
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        setCustomers([...customers, { ...formData, id: Date.now() }]);
-        setFormData({
-            name: "",
-            email: "",
-            cpf: "",
-            phone: "",
-            address: "",
-            status: "Ativo",
-        });
+        try {
+            if (editingId) {
+                await axios.put(`http://localhost:3099/api/clients/${editingId}`, formData);
+                setEditingId(null);
+            } else {
+                await axios.post("http://localhost:3099/api/clients/", formData);
+            }
+            fetchClients();
+            setFormData({ name: "", email: "", cnpj: "", phone: "", address: "", status: "Ativo" });
+            alert("Cliente salvo com sucesso!");
+        } catch (error) {
+            console.error("Erro ao salvar cliente", error);
+            alert(error.response?.data?.message || "Erro desconhecido.");
+        }
     };
 
-    const handleDeleteCustomer = (id) => {
-        setCustomers(customers.filter((customer) => customer.id !== id));
+    const handleDeleteClient = async (id) => {
+        try {
+            await axios.delete(`http://localhost:3099/api/clients/${id}`);
+            fetchClients();
+            alert("Cliente deletado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao deletar cliente", error);
+            alert("Erro ao deletar cliente.");
+        }
     };
 
-    const handleEditCustomer = (id) => {
-        const customerToEdit = customers.find((customer) => customer.id === id);
-        setFormData(customerToEdit);
-        setCustomers(customers.filter((customer) => customer.id !== id));
+    const handleEditClient = (id) => {
+        const clientToEdit = clients.find((client) => client.id === id);
+        if (clientToEdit) {
+            setFormData(clientToEdit);
+            setEditingId(id);
+        }
     };
 
     return (
-        <div className="ClinetComponent
-    ">
+        <div className="ClientComponent">
             <div className="page-titles">
                 <ol className="breadcrumb">
                     <li>
@@ -53,10 +81,10 @@ function ClinetComponent() {
                 </ol>
             </div>
 
-            {/* Formulário de Cadastro */}
+            {/* Formulário de Cadastro/Edição */}
             <div className="card mb-4">
                 <div className="card-body">
-                    <h4 className="card-title">Cadastrar Cliente</h4>
+                    <h4 className="card-title">{editingId ? "Editar Cliente" : "Cadastrar Cliente"}</h4>
                     <form onSubmit={handleFormSubmit}>
                         <div className="row">
                             <div className="col-md-4 mb-3">
@@ -85,9 +113,9 @@ function ClinetComponent() {
                                 <label>CPF/CNPJ</label>
                                 <input
                                     type="text"
-                                    name="cpf"
+                                    name="cnpj"
                                     className="form-control"
-                                    value={formData.cpf}
+                                    value={formData.cnpj}
                                     onChange={handleInputChange}
                                     required
                                 />
@@ -116,9 +144,9 @@ function ClinetComponent() {
                             <div className="col-md-6 mb-3">
                                 <label>Status</label>
                                 <select
-                                    name="status"
+                                    name="active"
                                     className="form-control"
-                                    value={formData.status}
+                                    value={formData.active}
                                     onChange={handleInputChange}
                                 >
                                     <option value="Ativo">Ativo</option>
@@ -127,7 +155,7 @@ function ClinetComponent() {
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary">
-                            Cadastrar
+                            {editingId ? "Salvar Alterações" : "Cadastrar"}
                         </button>
                     </form>
                 </div>
@@ -141,6 +169,7 @@ function ClinetComponent() {
                         <table className="table">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Nome</th>
                                     <th>Email</th>
                                     <th>CPF/CNPJ</th>
@@ -151,43 +180,44 @@ function ClinetComponent() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {customers.map((customer) => (
-                                    <tr key={customer.id}>
-                                        <td>{customer.name}</td>
-                                        <td>{customer.email}</td>
-                                        <td>{customer.cpf}</td>
-                                        <td>{customer.phone}</td>
-                                        <td>{customer.address}</td>
+                                {clients.map((client) => (
+                                    <tr key={client.id}>
+                                        <td>{client.id}</td>
+                                        <td>{client.name}</td>
+                                        <td>{client.email}</td>
+                                        <td>{client.cnpj}</td>
+                                        <td>{client.phone}</td>
+                                        <td>{client.address}</td>
                                         <td>
                                             <span
                                                 className={`badge ${
-                                                    customer.status === "Ativo"
-                                                        ? "badge-success"
-                                                        : "badge-danger"
+                                                    client.active === "Ativo"
+                                                        ? "bg-success"
+                                                        : "bg-danger"
                                                 }`}
                                             >
-                                                {customer.status}
+                                                {client.active}
                                             </span>
                                         </td>
                                         <td>
                                             <button
                                                 className="btn btn-warning btn-sm me-2"
-                                                onClick={() => handleEditCustomer(customer.id)}
+                                                onClick={() => handleEditClient(client.id)}
                                             >
                                                 Editar
                                             </button>
                                             <button
                                                 className="btn btn-danger btn-sm"
-                                                onClick={() => handleDeleteCustomer(customer.id)}
+                                                onClick={() => handleDeleteClient(client.id)}
                                             >
                                                 Deletar
                                             </button>
                                         </td>
                                     </tr>
                                 ))}
-                                {customers.length === 0 && (
+                                {clients.length === 0 && (
                                     <tr>
-                                        <td colSpan="6" className="text-center">
+                                        <td colSpan="8" className="text-center">
                                             Nenhum cliente cadastrado.
                                         </td>
                                     </tr>
@@ -201,4 +231,4 @@ function ClinetComponent() {
     );
 }
 
-export default ClinetComponent;
+export default ClientComponent;

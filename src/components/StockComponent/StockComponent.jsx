@@ -1,98 +1,138 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-function InventoryControl() {
-  const [stock, setStock] = useState([]);
+function StockComponent() {
+    const URL_API = "http://localhost:3099/api/stock/";
+    const [stocks, setStocks] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [formData, setFormData] = useState({
+        productId: "",
+        quantity: "",
+        location: ""
+    });
+    const [editingId, setEditingId] = useState(null);
 
-  // Simula o carregamento de dados do estoque
-  useEffect(() => {
-    async function fetchStock() {
-      // Substitua esta chamada por um fetch para a API real
-      const fakeStock = [
-        { id: 1, name: "Dexametazona", quantity: 50, unitPrice: 10.0 },
-        { id: 2, name: "Prostat", quantity: 30, unitPrice: 15.5 },
-        { id: 3, name: "Cafelexina", quantity: 20, unitPrice: 7.25 },
-      ];
-      setStock(fakeStock);
-    }
+    useEffect(() => {
+        fetchProducts();
+        fetchStocks();
+    }, []);
 
-    fetchStock();
-  }, []);
+    const fetchProducts = async () => {
+        try {
+            const response = await axios.get("http://localhost:3099/api/products/");
+            setProducts(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar produtos:", error);
+        }
+    };
 
-  // Função para editar um produto (placeholder)
-  const handleEdit = (id) => {
-    alert(`Editar produto com ID: ${id}`);
-  };
+    const fetchStocks = async () => {
+        try {
+            const response = await axios.get(URL_API);
+            setStocks(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar estoques:", error);
+        }
+    };
 
-  // Função para remover um produto
-  const handleRemove = (id) => {
-    if (window.confirm("Tem certeza que deseja remover este produto?")) {
-      setStock(stock.filter((item) => item.id !== id));
-    }
-  };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
 
-  
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            if (editingId) {
+                await axios.put(`${URL_API}/${editingId}`, formData);
+                setEditingId(null);
+            } else {
+                await axios.post(URL_API, formData);
+            }
+            setFormData({ productId: "", quantity: "", location: "" });
+            fetchStocks();
+        } catch (error) {
+            console.error("Erro ao salvar estoque", error);
+        }
+    };
 
-  return (
-    <div className="container mt-5">
-      <h2 className="text-center mb-4">Controle de Estoque</h2>
+    const handleEdit = (stock) => {
+        setFormData(stock);
+        setEditingId(stock.id);
+    };
 
-      {/* Botão para adicionar novos produtos */}
-      <div className="mb-4 text-end">
-        <a       href="/entradaProdutos"><button
-          className="btn btn-primary"
-          onClick={() => alert("Redirecionar para página de novo produto")}
-        >
-     Novo Produto
-        </button></a>
-      </div>
+    const handleDelete = async (id) => {
+        if (window.confirm("Tem certeza que deseja excluir este estoque?")) {
+            try {
+                await axios.delete(`${URL_API}/${id}`);
+                fetchStocks();
+            } catch (error) {
+                console.error("Erro ao deletar estoque", error);
+            }
+        }
+    };
 
-      {/* Tabela de controle de estoque */}
-      <table className="table table-bordered table-striped">
-        <thead className="table-dark">
-          <tr>
-            <th>ID</th>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Preço Unitário (R$)</th>
-            <th>Valor Total (R$)</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {stock.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.quantity}</td>
-              <td>{item.unitPrice.toFixed(2)}</td>
-              <td>{(item.quantity * item.unitPrice).toFixed(2)}</td>
-              <td>
-                <button
-                  className="btn btn-warning btn-sm me-2"
-                  onClick={() => handleEdit(item.id)}
-                >
-                  Editar
-                </button>
-                {/* <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => handleRemove(item.id)}
-                >
-                  Remover
-                </button> */}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Mensagem caso o estoque esteja vazio */}
-      {stock.length === 0 && (
-        <div className="alert alert-warning text-center">
-          Nenhum produto em estoque.
+    return (
+        <div className="stockComponent">
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h4 className="card-title">{editingId ? "Editar" : "Cadastrar"} Estoque</h4>
+                    <form onSubmit={handleSubmit}>
+                        <div className="row">
+                            <div className="col-md-4 mb-3">
+                                <label>Produto</label>
+                                <select name="productId" className="form-control" value={formData.productId} onChange={handleChange} required>
+                                    <option value="">Selecione um produto</option>
+                                    {products.map((product) => (
+                                        <option key={product.id} value={product.id}>{product.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="col-md-4 mb-3">
+                                <label>Quantidade em Estoque</label>
+                                <input type="number" name="quantity" className="form-control" value={formData.quantity} onChange={handleChange} required />
+                            </div>
+                            <div className="col-md-4 mb-3">
+                                <label>Localização</label>
+                                <input type="text" name="location" className="form-control" value={formData.location} onChange={handleChange} required />
+                            </div>
+                        </div>
+                        <button type="submit" className="btn btn-primary">{editingId ? "Atualizar" : "Cadastrar"}</button>
+                    </form>
+                </div>
+            </div>
+            <div className="card">
+                <div className="card-body">
+                    <h4 className="card-title">Estoque</h4>
+                    <div className="table-responsive">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Localização</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {stocks.map((stock) => (
+                                    <tr key={stock.id}>
+                                        <td>{products.find(p => p.id === stock.productId)?.name || "Desconhecido"}</td>
+                                        <td>{stock.quantity}</td>
+                                        <td>{stock.location}</td>
+                                        <td>
+                                            <button className="btn btn-warning btn-sm me-2" onClick={() => handleEdit(stock)}>Editar</button>
+                                            <button className="btn btn-danger btn-sm" onClick={() => handleDelete(stock.id)}>Deletar</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      )}
-    </div>
-  );
+    );
 }
 
-export default InventoryControl;
+export default StockComponent;
