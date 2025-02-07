@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 
 function Sale2Component() {
+    const [products] = useState([
+        { id: 1, name: "Ração Premium", price: 50.0 },
+        { id: 2, name: "Banho e Tosa", price: 80.0 },
+        { id: 3, name: "Brinquedo para Pet", price: 25.0 },
+    ]);
+    const [clients] = useState([
+        { id: 1, name: "Normal"  },
+        { id: 2, name: "João"},
+        { id: 3, name: "Leila", },
+    ]);
+
     const [sales, setSales] = useState([]);
     const [formData, setFormData] = useState({
-        productName: "",
+        productId: "",
         customer: "",
-        price: "",
         quantity: "",
         total: "",
         status: "Pendente",
@@ -16,17 +26,25 @@ function Sale2Component() {
         setFormData({ ...formData, [name]: value });
     };
 
+    const handleProductChange = (e) => {
+        const productId = e.target.value;
+        const selectedProduct = products.find(p => p.id === parseInt(productId));
+        setFormData({ ...formData, productId, price: selectedProduct ? selectedProduct.price : "" });
+    };
+
+    const handleClientChange = (e)=>{
+        const clientId = e.target.value;
+        const selectdClient = clients.find(p => p.id === parseInt(clientId));
+        setFormData({...formData, clientId})
+    }
+
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        setSales([...sales, { ...formData, id: Date.now(), total: (formData.price * formData.quantity).toFixed(2) }]);
-        setFormData({
-            productName: "",
-            customer: "",
-            price: "",
-            quantity: "",
-            total: "",
-            status: "Pendente",
-        });
+        const selectedProduct = products.find(p => p.id === parseInt(formData.productId));
+        if (!selectedProduct) return;
+        const total = (selectedProduct.price * formData.quantity).toFixed(2);
+        setSales([...sales, { ...formData, id: Date.now(), productName: selectedProduct.name, total }]);
+        setFormData({ productId: "", customer: "", quantity: "", total: "", status: "Pendente" });
     };
 
     const handleDeleteSale = (id) => {
@@ -41,18 +59,6 @@ function Sale2Component() {
 
     return (
         <div className="Sale2Component">
-            <div className="page-titles">
-                <ol className="breadcrumb">
-                    <li>
-                        <h5 className="bc-title">Gerenciar Vendas</h5>
-                    </li>
-                    <li className="breadcrumb-item active">
-                        <a href="/">Gerenciar Vendas</a>
-                    </li>
-                </ol>
-            </div>
-
-            {/* Formulário de Cadastro */}
             <div className="card mb-4">
                 <div className="card-body">
                     <h4 className="card-title">Registrar Venda</h4>
@@ -60,33 +66,45 @@ function Sale2Component() {
                         <div className="row">
                             <div className="col-md-4 mb-3">
                                 <label>Produto</label>
-                                <input
-                                    type="text"
-                                    name="productName"
+                                <select
+                                    name="productId"
                                     className="form-control"
-                                    value={formData.productName}
-                                    onChange={handleInputChange}
+                                    value={formData.productId}
+                                    onChange={handleProductChange}
                                     required
-                                />
+                                >
+                                    <option value="">Selecione um produto</option>
+                                    {products.map((product) => (
+                                        <option key={product.id} value={product.id}>
+                                            {product.name} - R$ {product.price.toFixed(2)}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="col-md-4 mb-3">
                                 <label>Cliente</label>
+                                <select
+                                    name="clientId"
+                                    className="form-control"
+                                    value={formData.clientId}
+                                    onChange={handleClientChange}
+                                    required
+                                >
+                                    <option value="">Selecione um cliente</option>
+                                    {clients.map((client) => (
+                                        <option key={client.id} value={client.id}>
+                                            {client.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="col-md-4 mb-3">
+                                <label>Valor</label>
                                 <input
                                     type="text"
                                     name="customer"
                                     className="form-control"
                                     value={formData.customer}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            <div className="col-md-4 mb-3">
-                                <label>Preço Unitário</label>
-                                <input
-                                    type="number"
-                                    name="price"
-                                    className="form-control"
-                                    value={formData.price}
                                     onChange={handleInputChange}
                                     required
                                 />
@@ -121,8 +139,6 @@ function Sale2Component() {
                     </form>
                 </div>
             </div>
-
-            {/* Tabela de Vendas */}
             <div className="card">
                 <div className="card-body">
                     <h4 className="card-title">Vendas Registradas</h4>
@@ -148,25 +164,15 @@ function Sale2Component() {
                                         <td>{sale.quantity}</td>
                                         <td>R$ {sale.total}</td>
                                         <td>
-                                            <span
-                                                className={`badge ${
-                                                    sale.status === "Concluída" ? "badge-success" : "badge-warning"
-                                                }`}
-                                            >
+                                            <span className={`badge ${sale.status === "Concluída" ? "badge-success" : "badge-warning"}`}>
                                                 {sale.status}
                                             </span>
                                         </td>
                                         <td>
-                                            <button
-                                                className="btn btn-warning btn-sm me-2"
-                                                onClick={() => handleEditSale(sale.id)}
-                                            >
+                                            <button className="btn btn-warning btn-sm me-2" onClick={() => handleEditSale(sale.id)}>
                                                 Editar
                                             </button>
-                                            <button
-                                                className="btn btn-danger btn-sm"
-                                                onClick={() => handleDeleteSale(sale.id)}
-                                            >
+                                            <button className="btn btn-danger btn-sm" onClick={() => handleDeleteSale(sale.id)}>
                                                 Deletar
                                             </button>
                                         </td>
@@ -174,9 +180,7 @@ function Sale2Component() {
                                 ))}
                                 {sales.length === 0 && (
                                     <tr>
-                                        <td colSpan="7" className="text-center">
-                                            Nenhuma venda registrada.
-                                        </td>
+                                        <td colSpan="7" className="text-center">Nenhuma venda registrada.</td>
                                     </tr>
                                 )}
                             </tbody>
