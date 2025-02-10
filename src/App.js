@@ -19,6 +19,7 @@ import SalesDataPage from "./page/Sale/SalesDataPage";
 import SettingsPage from "./page/Settings/SettingsPage";
 import SettingFormPage from "./page/Settings/SettingsFormPage";
 import LogoffPage from "./page/Logoff/LogoffPage";
+import OrderPage from "./page/Order/OrderPage";
 import axios from "axios";
 
 // Função para verificar se o usuário está autenticado
@@ -47,6 +48,7 @@ function App() {
           <Route path="/produtos" element={<ProtectedRoute element={<ProductPage />} />} />
           <Route path="/vendas" element={<ProtectedRoute element={<SalesPage />} />} />
           <Route path="/dadosVendas" element={<ProtectedRoute element={<SalesDataPage />} />} />
+          <Route path="/pedidoVenda" element={<ProtectedRoute element={<OrderPage /> } />} />
           <Route path="/entradaProdutos" element={<ProtectedRoute element={<EnterProductPage />} />} />
           <Route path="/listaEntradaProdutos" element={<ProtectedRoute element={<EnterProductList />} />} />
           <Route path="/detalhes-entrada" element={<ProtectedRoute element={<EnterProductDetailsPage />} />} />

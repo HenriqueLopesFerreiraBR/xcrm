@@ -11,7 +11,7 @@ function Sale2Component() {
         { id: 2, name: "João"},
         { id: 3, name: "Leila", },
     ]);
-
+    const cart = []
     const [sales, setSales] = useState([]);
     const [formData, setFormData] = useState({
         productId: "",
@@ -133,8 +133,13 @@ function Sale2Component() {
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">
+                        {/* <button type="submit" className="btn btn-primary">
                             Registrar Venda
+                        </button> */}
+                        <button type="submit" className="btn btn-primary">
+                            <a href="/pedidoVenda">
+                                Nova Venda
+                            </a>
                         </button>
                     </form>
                 </div>
